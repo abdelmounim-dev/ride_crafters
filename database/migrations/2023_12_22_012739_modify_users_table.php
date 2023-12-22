@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('name', 'first_name');
+        Schema::rename("users", "old_users");
+        Schema::create('users', function (Blueprint $table) {
+            $table->string('first_name');
             $table->string('last_name')->after('first_name');
             $table->string('phone_number')->nullable()->after('last_name');
-            $table->string('student_id')->unique()->after('phone_number');
+            $table->string('email')->after('phone_number');
+            $table->string('student_id')->unique()->after('email');
+            $table->string('password')->after('student_id');
             $table->boolean('is_admin')->default(false)->after('password');
         });
     }
