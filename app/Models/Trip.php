@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Trip extends Model
@@ -26,9 +26,9 @@ class Trip extends Model
         return $this->HasOne(User::class);
     }
 
-    public function passengers(): HasMany
+    public function passengers(): BelongsToMany
     {
-        return $this->HasMany(User::class);
+        return $this->BelongsToMany(User::class, 'trips_users', 'trip_id', 'user_id');
     }
 
     use HasFactory;

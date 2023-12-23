@@ -52,13 +52,12 @@ class TripSeeder extends Seeder
                 'driver_id' => $driver->id,
                 'available_seats' => $faker->numberBetween(1, 5),
             ]);
-
             // Optionally, add passengers to the trip
-            // $passengersCount = $faker->numberBetween(0, 5);
-            // $passengersCount = 5;
-            // $passengers = User::inRandomOrder()->limit($passengersCount)->get();
-            // $trip->passengers()->match($passengers);
+            $passengersCount = $faker->numberBetween(0, 5);
+            $passengers = User::inRandomOrder()->limit($passengersCount)->get();
+
+            // Use the attach() method to associate passengers with the trip
+            $trip->passengers()->attach($passengers->pluck('id')->toArray());
         }
     }
 }
-
