@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\LocationController;
-use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post("/register", [AuthController::class, 'register']);
 Route::post("/login", [AuthController::class, 'login']);
 Route::apiResource('trips', TripController::class);
+Route::post('/trips/{tripId}/add-passengers', [TripController::class, 'addPassengers']);
 Route::apiResource('locations', LocationController::class);
-Route::apiResource('reservations', ReservationController::class);

@@ -86,5 +86,28 @@ class TripController extends Controller
 
         return response()->json(['message' => 'Trip deleted successfully']);
     }
-}
 
+    /**
+     * Add passengers to a trip.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $tripId
+     * @return \Illuminate\Http\Response
+     */
+    public function addPassengers(Request $request, $tripId)
+    {
+        // Validate the request
+        $request->validate([
+            'passenger_ids' => 'required|array',
+            'passenger_ids.*' => 'exists:users,id',
+        ]);
+
+        // Find the trip
+        $trip = Trip::findOrFail($tripId);
+
+        // Attach passengers to the trip
+        $trip->passengers()->attach($request->input('passenger_ids'));
+
+        return response()->json(['message' => 'Passengers added successfully'], 200);
+    }
+}
