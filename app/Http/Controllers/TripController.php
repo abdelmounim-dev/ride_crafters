@@ -3,63 +3,88 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Trip;
 
 class TripController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $trips = Trip::all();
+        return response()->json($trips);
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'start_location' => 'required',
+            'destination' => 'required',
+            'departure_time' => 'required',
+            'driver_id' => 'required',
+            'available_seats' => 'required',
+        ]);
+
+        $trip = Trip::create($request->all());
+        return response()->json($trip, 201);
     }
 
     /**
      * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $trip = Trip::findOrFail($id);
+        return response()->json($trip);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'start_location' => 'required',
+            'destination' => 'required',
+            'departure_time' => 'required',
+            'driver_id' => 'required',
+            'available_seats' => 'required',
+        ]);
+
+        $trip = Trip::findOrFail($id);
+        $trip->update($request->all());
+
+        return response()->json($trip);
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $trip = Trip::findOrFail($id);
+        $trip->delete();
+
+        return response()->json(['message' => 'Trip deleted successfully']);
     }
 }
 

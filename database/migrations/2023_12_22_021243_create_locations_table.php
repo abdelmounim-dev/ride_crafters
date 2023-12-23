@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->float('latitude', 10, 6);
             $table->float('longitude', 10, 6);
-             $table->timestamps();
+            $table->string('address');
+            $table->timestamps();
         });
     }
 
