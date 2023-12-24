@@ -32,4 +32,26 @@ class Trip extends Model
     }
 
     use HasFactory;
+
+    //Filter
+    public function scopeFilter($query, array $filters) {
+
+        //User clicks on tags to get quick searches
+        if($filters['tag'] ?? false) {
+            $query->where('tags', 'like', '%' . request('tag') . '%');
+        }
+
+        //Search bar
+        if($filters['search'] ?? false) {
+            $query->where('start_location', 'like', '%' . request('search') . '%')
+                ->where('destination', 'like', '%' . request('search') . '%')
+                ->orWhere('departure_time', 'like', '%' . request('search') . '%')
+                ->orWhere('available_seats', 'like', '%' . request('search') . '%');
+        }
+    }
+
+    //Each Trip has its owner: in our case driver_id or user_id
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
