@@ -44,4 +44,13 @@ class AdminController extends Controller
         // Return JSON response with success message
         return response()->json(['message' => 'User deleted successfully']);
     }
+
+    public function showAllDrivers(Request $request)
+    {
+        // Fetch all drivers from the database
+        $drivers = Driver::all();
+
+        // Return JSON response with the list of drivers
+        return response()->json(['drivers' => $drivers]);
+    }
 }
