@@ -39,3 +39,10 @@ Route::post('/driver', [DriverController::class, 'update']);
 Route::post("/register", [AuthController::class, 'register']);
 Route::post("/login", [AuthController::class, 'login']);
 
+
+Route::get('/api/admin/trips', [AdminController::class,'showAllTrips']);
+
+Route::delete('/api/admin/trips/{id}', [AdminController::class,'deleteTrip']);
+Route::delete('/api/admin/users/{id}', [AdminController::class,'@deleteUser']);
+Route::get('/api/admin/drivers', [AdminController::class,'showAllDrivers']);
+
