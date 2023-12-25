@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('start_location');
-            $table->string('destination');
+            //$table->string('start_location');
+            //$table->json('start_location')->nullable();
+
+            //$table->string('destination');
             $table->dateTime('departure_time');
             $table->foreignId('driver_id')->constrained('users')->onDelete('cascade');
             $table->foreignIdFor(Driver::class);
@@ -25,8 +27,8 @@ return new class extends Migration
             //start location and destination = 4 coordinates
             //why not use json to hold each pair?
 
-            //$table->json('origin')->nullable();
-            //$table->json('destination')->nullable();
+            $table->json('origin')->nullable();
+            $table->json('destination')->nullable();
 
             $table->timestamps();
         });

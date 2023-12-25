@@ -11,6 +11,14 @@ class Trip extends Model
 {
     protected $fillable = ['start_location', 'destination', 'departure_time', 'driver_id', 'available_seats'];
 
+    protected $casts = [
+        'origin' => 'array',
+        'destination' => 'array',
+        'is_complete'=> 'boolean',
+        'is_started'=> 'boolean',
+
+    ];
+
     public function startLocation(): HasOne
     {
         return $this->HasOne(Location::class);
