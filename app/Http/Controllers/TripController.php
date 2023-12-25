@@ -1,5 +1,8 @@
 <?php
 
+//Important
+//'driver_location' change it to 'origin'
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,13 +16,19 @@ class TripController extends Controller
         //user joining a carpooling
         $request->validate([
             'driver_location' => 'required'
+            //'driver_location' change it to 'origin'
+            //because in our case driver_location
+            //is the point to meet att of carpooling 
         ]
             
         );
+    
 
     $trip->update([
     'driver_id'=> $request->user()->id,
     'driver_location'=>$request->driver_location,
+    //'driver_location' change it to 'origin'
+
     ]); 
 
 

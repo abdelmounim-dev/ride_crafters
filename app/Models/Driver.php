@@ -1,7 +1,7 @@
 <?php
 //A Driver is a user that hold additional information
 // alot of benefits of creating it as a seperate model 
-// Driver cannot change his car without permission from Admin
+// Driver cannot change his car without permission from Admin , we will add that after
 
 namespace App\Models;
 
