@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             //$table->string('start_location');
             //$table->json('start_location')->nullable();
-
             //$table->string('destination');
+            
             $table->dateTime('departure_time');
             $table->foreignId('driver_id')->constrained('users')->onDelete('cascade');
             $table->foreignIdFor(Driver::class);

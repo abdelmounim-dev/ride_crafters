@@ -130,7 +130,8 @@ class TripController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'start_location' => 'required',
+            //'start_location' => 'required',
+            'origin' => 'required',
             'destination' => 'required',
             'departure_time' => 'required',
             'driver_id' => 'required',
