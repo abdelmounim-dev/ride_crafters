@@ -18,12 +18,7 @@ use App\Http\Controllers\LocationController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::post("/register", [AuthController::class, 'register']);
-Route::post("/login", [AuthController::class, 'login']);
-
+    
 Route::apiResource('trips', TripController::class);
 Route::post('/trips', [TripController::class, 'store']);
 Route::get('/trips/{trips}', [TripController::class, 'show']);
@@ -37,3 +32,10 @@ Route::apiResource('reservations', ReservationController::class);
 
 Route::get('/driver', [DriverController::class, 'show']);
 Route::post('/driver', [DriverController::class, 'update']);
+
+    return $request->user();
+});
+
+Route::post("/register", [AuthController::class, 'register']);
+Route::post("/login", [AuthController::class, 'login']);
+

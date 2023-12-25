@@ -14,6 +14,7 @@ class Trip extends Model
     protected $casts = [
         'origin' => 'array',
         'destination' => 'array',
+        //'driver_location' => 'array', we will not update driver location each time ,so 'driver_location' = 'origin' 
         'is_complete'=> 'boolean',
         'is_started'=> 'boolean',
 
