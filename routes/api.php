@@ -18,30 +18,35 @@ use App\Http\Controllers\LocationController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    
-Route::apiResource('trips', TripController::class);
-Route::post('/api/trips', [TripController::class, 'store']);
-Route::get('/api/trips/{trips}', [TripController::class, 'show']);
-Route::post('/api/trips/{trips}/accept', [TripController::class, 'accept']);
-Route::post('/api/trips/{trips}/start', [TripController::class, 'start']);
-Route::post('/api/trips/{trips}/end', [TripController::class, 'end']);
-Route::post('/api/trips/{trips}/location', [TripController::class, 'location']);
+    // Routes accessible only by authenticated users
 
-Route::apiResource('/api/locations', LocationController::class);
-Route::apiResource('/api/reservations', ReservationController::class);
+    // Trip Routes    
+    Route::apiResource('trips', TripController::class);
+    Route::post('trips', [TripController::class, 'store']);
+    Route::get('trips/{trips}', [TripController::class, 'show']);
+    Route::post('trips/{trips}/accept', [TripController::class, 'accept']);
+    Route::post('trips/{trips}/start', [TripController::class, 'start']);
+    Route::post('trips/{trips}/end', [TripController::class, 'end']);
+    Route::post('trips/{trips}/location', [TripController::class, 'location']);
 
-Route::get('/api/driver', [DriverController::class, 'show']);
-Route::post('/api/driver', [DriverController::class, 'update']);
+    Route::apiResource('locations', LocationController::class);
+    Route::apiResource('reservations', ReservationController::class);
 
-    return $request->user();
+    // Driver Routes
+    Route::get('driver', [DriverController::class, 'show']);
+    Route::post('driver', [DriverController::class, 'update']);
 });
 
+
+//Auth Routes
 Route::post("/api/register", [AuthController::class, 'register']);
 Route::post("/api/login", [AuthController::class, 'login']);
 
-
-Route::get('/api/admin/trips', [AdminController::class,'showAllTrips']);
-Route::delete('/api/admin/trips/{id}', [AdminController::class,'deleteTrip']);
-Route::delete('/api/admin/users/{id}', [AdminController::class,'deleteUser']);
-Route::get('/api/admin/drivers', [AdminController::class,'showAllDrivers']);
-
+// Admin Routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/api/admin/trips', [AdminController::class,'showAllTrips']);
+    Route::delete('/api/admin/trips/{id}', [AdminController::class,'deleteTrip']);
+    Route::delete('/api/admin/users/{id}', [AdminController::class,'deleteUser']);
+    Route::get('/api/admin/drivers', [AdminController::class,'showAllDrivers']);
+    Route::put('/api/admin/users/{id}/assign-admin', [AdminController::class,'assignAdmin']);
+});

@@ -53,4 +53,24 @@ class AdminController extends Controller
         // Return JSON response with the list of drivers
         return response()->json(['drivers' => $drivers]);
     }
+
+    public function assignAdmin(Request $request, $userId)
+    {
+        // Find the user by ID
+        $user = User::find($userId);
+
+        // Check if the user exists
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        // Assign admin status
+        $user->is_admin = true;
+
+        // Save the changes
+        $user->save();
+
+        // Return JSON response with success message
+        return response()->json(['message' => 'User is now an admin']);
+    }
 }
