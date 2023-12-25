@@ -6,6 +6,66 @@ use Illuminate\Http\Request;
 
 class TripController extends Controller
 {
+
+
+    public function join(Request $request,Trip $trip)
+    {   
+        //user joining a carpooling
+        $request->validate([
+            'driver_location' => 'required'
+        ]
+            
+        );
+
+    $trip->update([
+    'driver_id'=> $request->user()->id,
+    'driver_location'=>$request->driver_location,
+    ]); 
+
+
+        //get driver information
+        // driver has relationship with user
+        $trip->load('driver.user');
+        return $trip;
+    }
+
+    public function start(Request $request,Trip $trip)
+    {
+        //a driver has started the carpooling
+        $trip->update([
+            'is_started'=>true
+        ]);
+
+        $trip->load('driver.user');
+        return $trip;
+    }
+
+    public function end(Request $request,Trip $trip)
+    {
+        //a driver has completed the carpooling
+        $trip->update([
+            'is_started'=>false
+        ]);
+
+        $trip->load('driver.user');
+        return $trip;
+    }
+
+    public function location(Request $request,Trip $trip)
+    {
+        
+        $request->validate([
+            'driver_location'=> 'required'
+        ]);
+        $trip->update([
+            'driver_location'=>$request->driver_location
+        ]);
+
+        $trip->load('driver.user');
+        return $trip;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
