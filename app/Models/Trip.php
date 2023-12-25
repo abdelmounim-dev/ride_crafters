@@ -49,6 +49,7 @@ class Trip extends Model
             $query->where('tags', 'like', '%' . request('tag') . '%');
         }
 
+        //OR Uses the
         //Search bar
         if($filters['search'] ?? false) {
             $query->where('start_location', 'like', '%' . request('search') . '%')
