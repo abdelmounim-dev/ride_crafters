@@ -22,19 +22,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     // Trip Routes    
     Route::apiResource('trips', TripController::class);
-    Route::post('trips', [TripController::class, 'store']);
-    Route::get('trips/{trips}', [TripController::class, 'show']);
-    Route::post('trips/{trips}/accept', [TripController::class, 'accept']);
-    Route::post('trips/{trips}/start', [TripController::class, 'start']);
-    Route::post('trips/{trips}/end', [TripController::class, 'end']);
-    Route::post('trips/{trips}/location', [TripController::class, 'location']);
+    Route::post('/trips', [TripController::class, 'store']);
+    Route::get('/trips/{trips}', [TripController::class, 'show']);
+    Route::post('/trips/{trips}/accept', [TripController::class, 'accept']);
+    Route::post('/trips/{trips}/start', [TripController::class, 'start']);
+    Route::post('/trips/{trips}/end', [TripController::class, 'end']);
+    Route::post('/trips/{trips}/location', [TripController::class, 'location']);
 
-    Route::apiResource('locations', LocationController::class);
-    Route::apiResource('reservations', ReservationController::class);
+    Route::apiResource('/locations', LocationController::class);
+    Route::apiResource('/reservations', ReservationController::class);
 
     // Driver Routes
-    Route::get('driver', [DriverController::class, 'show']);
-    Route::post('driver', [DriverController::class, 'update']);
+    Route::get('/driver', [DriverController::class, 'show']);
+    Route::post('/driver', [DriverController::class, 'update']);
 });
 
 
