@@ -23,6 +23,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post("/register", [AuthController::class, 'register']);
 Route::post("/login", [AuthController::class, 'login']);
+
 Route::apiResource('trips', TripController::class);
-Route::post('/trips/{tripId}/add-passengers', [TripController::class, 'addPassengers']);
+Route::post('/trips', [TripController::class, 'store']);
+Route::get('/trips/{trips}', [TripController::class, 'show']);
+Route::post('/trips/{trips}/accept', [TripController::class, 'accept']);
+Route::post('/trips/{trips}/start', [TripController::class, 'start']);
+Route::post('/trips/{trips}/end', [TripController::class, 'end']);
+Route::post('/trips/{trips}/location', [TripController::class, 'location']);
+
 Route::apiResource('locations', LocationController::class);
+Route::apiResource('reservations', ReservationController::class);
+
+Route::get('/driver', [DriverController::class, 'show']);
+Route::post('/driver', [DriverController::class, 'update']);

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -40,8 +39,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function trips(): BelongsToMany
+    public function driver()
     {
-        return $this->belongsToMany(Trip::class, 'trips_users', 'user_id', 'trip_id');
+        return $this->hasOne(Driver::class);
+    }
+
+    public function trips()
+    {
+        return $this->hasMany(Trip::class);
     }
 }
