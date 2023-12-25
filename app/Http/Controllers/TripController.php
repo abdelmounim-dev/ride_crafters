@@ -29,6 +29,7 @@ class TripController extends Controller
     'driver_id'=> $request->user()->id,
     'driver_location'=>$request->driver_location,
     //'driver_location' change it to 'origin'
+    
 
     ]); 
 
