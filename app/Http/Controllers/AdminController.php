@@ -7,6 +7,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Trip;
+use App\Models\User;
+use App\Models\Driver;
 
 class AdminController extends Controller
 {
@@ -17,7 +20,7 @@ class AdminController extends Controller
         $trips = Trip::all();
 
         // Return JSON response with the list of trips
-        return response()->json(['trip' => $trip]);;
+        return response()->json(['trip' => $trips]);;
     }
 
 
