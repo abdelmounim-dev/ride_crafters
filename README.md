@@ -4,6 +4,14 @@
 
 RideCrafters is the backend for a ride-hailing application. It provides the necessary API endpoints for managing trips, locations, and reservations. This project is designed to handle all the server-side logic and database interactions for the ride-hailing app, allowing the frontend to focus on user interactions.
 
+## Technologies
+
+The project is built using the following technologies:
+- Laravel: A PHP framework for building web applications
+- sqlite: A lightweight database engine for storing application data
+- Composer: A package manager for PHP
+- Sanctum: A Laravel package for API authentication
+
 ## Installation
 
 Follow these steps to install the project:
