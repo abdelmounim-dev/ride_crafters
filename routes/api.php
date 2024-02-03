@@ -26,11 +26,11 @@ use App\Http\Controllers\AdminController;
 // Route::apiResource('/trips', TripController::class);
 Route::get('/trips', [TripController::class, 'index']);
 Route::post('/trips', [TripController::class, 'store']);
-Route::get('/trips/{trips}', [TripController::class, 'show']);
-Route::post('/trips/{trips}/accept', [TripController::class, 'accept']);
-Route::post('/trips/{trips}/start', [TripController::class, 'start']);
-Route::post('/trips/{trips}/end', [TripController::class, 'end']);
-Route::post('/trips/{trips}/location', [TripController::class, 'location']);
+Route::get('/trips/{id}', [TripController::class, 'show']);
+Route::post('/trips/{id}/accept', [TripController::class, 'accept']);
+Route::post('/trips/{id}/start', [TripController::class, 'start']);
+Route::post('/trips/{id}/end', [TripController::class, 'end']);
+Route::post('/trips/{id}/location', [TripController::class, 'location']);
 
 Route::apiResource('/locations', LocationController::class);
 // Route::apiResource('/reservations', ReservationController::class);
