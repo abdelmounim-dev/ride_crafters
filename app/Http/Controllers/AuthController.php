@@ -60,7 +60,7 @@ class AuthController extends Controller
 
             $token = $user->createToken('api_token')->plainTextToken;
 
-            return response()->json(['token' => $token]);
+            return response()->json(['token' => $token, 'user' => $user]);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         }
